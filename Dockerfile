@@ -1,5 +1,5 @@
 ARG ALPINE_VERSION=3.13
-ARG AWS_CDK_VERSION=2.27.0
+ARG AWS_CDK_VERSION=2.41.0
 FROM alpine:${ALPINE_VERSION}
 
 RUN apk -v --no-cache --update add \
@@ -16,9 +16,10 @@ RUN apk -v --no-cache --update add \
         zip \
         git \
         py-pip \
-        && \
-    update-ca-certificates && \
-    npm install -g aws-cdk@${AWS_CDK_VERSION}
+        docker
+
+RUN update-ca-certificates
+RUN npm install -g aws-cdk@${AWS_CDK_VERSION}
 
 VOLUME [ "/root/.aws" ]
 VOLUME [ "/opt/app" ]
@@ -28,4 +29,6 @@ VOLUME ["/usr/lib/python3.8/site-packages/"]
 
 WORKDIR /opt/app
 
-CMD ["cdk", "--version"]
+RUN pip install --upgrade pip
+
+CMD ["npx", "cdk"]

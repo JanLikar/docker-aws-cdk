@@ -1,5 +1,5 @@
-AWS_CDK_VERSION = 1.105.0
-IMAGE_NAME ?= contino/aws-cdk:$(AWS_CDK_VERSION)
+AWS_CDK_VERSION = 2.41.0
+IMAGE_NAME ?= janlikar/aws-cdk:$(AWS_CDK_VERSION)
 TAG = $(AWS_CDK_VERSION)
 
 build:
